@@ -1,1 +1,3 @@
-# J-Link_Synchronous_Minimum
+# J-Link_Synchronous_Minimal
+
+Dieses Beispiel 
