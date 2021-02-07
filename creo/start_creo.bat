@@ -13,25 +13,17 @@ set CREO_LOADPOINT=C:\Program Files\PTC Creo 2.0 M150\Creo 2.0
 set DATECODE=M150
 set MACHINE_TYPE=x86e_win64
 
-:: set JLINK_JAVA_HOME=%CREO_LOADPOINT%\Common Files\%DATECODE%\%MACHINE_TYPE%\obj\JRE :: 1.8.0_60
-set JLINK_JAVA_HOME=D:\SDK\Java\jdk1.8.0_74_x64\jre
+:: CREO JRE 1.6.0_13
+set JLINK_JAVA_HOME=%CREO_LOADPOINT%\Common Files\%DATECODE%\%MACHINE_TYPE%\obj\JRE
 
-
-:: Add all you need to the CLASSPATH variable
-:: set CLASSPATH=%CLASSPATH%;%JLINK_TEST_HOME%
-:: set CLASSPATH=%JLINK_HOME%
-::set CLASSPATH=%CLASSPATH%;%JLINK_HOME%
-::set CLASSPATH=%CLASSPATH%;%JLINK_JAVA_HOME%\lib
-
-:: set PRO_LANG=english
-
-:: build creo config
+:: Build creo config
 copy %JLINK_HOME%\config\config_jlink.pro + %JLINK_HOME%\config\config_oloid-design.pro  %JLINK_HOME%\config.pro
 
-
+:: Remove old stuff
 del %JLINK_HOME%\trail.txt.* /q
 del %JLINK_HOME%\std.out /q
 
+:: Copy new application data
 xcopy /Y /E %JLINK_HOME%\..\bin\com\* %JLINK_HOME%\app\com\
 
 ::## Creo staten ##
@@ -44,6 +36,5 @@ xcopy /Y /E %JLINK_HOME%\..\bin\com\* %JLINK_HOME%\app\com\
 :: In das Projektverzeichnis wechseln 
 cd %JLINK_HOME%
 
-:: "C:\Program Files\PTC Creo 2.0 M150\Creo 2.0\Parametric\bin\parametric.exe" >> ./out1.txt 2> ./out2.txt
-:: start "" "%CREO_LOADPOINT%\Parametric\bin\parametric.exe" .\trail_oloid-design.txt %*
+:: Start Creo
 start "" "%CREO_LOADPOINT%\Parametric\bin\parametric.exe" %*
